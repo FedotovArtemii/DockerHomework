@@ -2,6 +2,7 @@
 API для TODO реализовано с помощью java spring, в качестве БД используется Prostgres 
 
 ## Поддержвиваемые методы:
+По умолчаню запускается на порте 8082
 GET /api/todo - возвращает все todo<br>
 GET /api/todo/{id} - возвращает todo по id<br>
 PATCH /api/todo/{id} - устанавливает isCompleted=true для todo по id<br>

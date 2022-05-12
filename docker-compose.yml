@@ -1,0 +1,27 @@
+version: '2.3'
+
+services:
+  app:
+    image: '${IMAGE_NAME}:${TAG}'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+          
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    volumes:
+      - ".:/app:rw"
+    environment:
+      - POSTGRES_USER=${USERNAME}
+      - POSTGRES_PASSWORD=${PASSWORD}
+      - POSTGRES_DB=${DB_NAME}

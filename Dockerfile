@@ -15,7 +15,7 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -DskipTests -Dversion=${VERSION}
 
-FROM openjdk:11-jre-slim
+FROM openjdk
 ARG VERSION
 COPY --from=build /home/app/target/ToDo-${VERSION}.jar /usr/local/lib/ToDo.jar
 EXPOSE 8080
